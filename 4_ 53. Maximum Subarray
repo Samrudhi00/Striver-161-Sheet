@@ -1,0 +1,65 @@
+====================================  BRUTE  ==================================
+///////////////   TL  => TC O(n^3)  //////////////////////
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int maximum=INT_MIN;
+        int n=nums.size();
+        for(int i=0;i<n;i++){
+            for(int j=i;j<n;j++){
+                int sum=0;
+
+                for(int k=i;k<=j;k++){
+                    sum+=nums[k];
+                }
+                
+                maximum=max(maximum,sum);
+            }
+        }
+        return maximum;
+    }
+};
+
+====================================  BETTER  ==================================
+///////////////   TL  => TC O(n^2)  ////////////////////// 
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int maximum=INT_MIN;
+        int n=nums.size();
+        for(int i=0;i<n;i++){
+            int sum = 0;
+            for (int j = i; j < n; j++) {
+                sum += nums[j];
+                maximum = max(maximum, sum);
+            }
+        }
+        return maximum;
+    }
+};
+
+
+====================================  OPTIMAL  ==================================
+====================================  Kadanes Algorithm  ==================================
+///////////////   TL  => TC O(n^2)  ////////////////////// 
+
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int n = nums.size();
+        long long maxi = LONG_MIN; // maximum sum
+        long long sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += nums[i];
+            if (sum > maxi) {
+                maxi = sum;
+            }
+            if (sum < 0) {
+                sum = 0;
+            }
+        }
+        // To consider the sum of the empty subarray
+        // if (maxi < 0) maxi = 0;
+        return maxi;
+    }
+};
