@@ -1,0 +1,76 @@
+==================================================BRUTE===============================================
+ERROR if -1 is thier in matrix EG: [[-1],[2],[3]]
+#include <vector>
+
+class Solution {
+public:
+    void markRow(std::vector<std::vector<int>> &matrix, int n, int m, int i) {
+        for (int j = 0; j < m; j++) {
+            if (matrix[i][j] != 0 && matrix[i][j] != -1) {
+                matrix[i][j] = -1;
+            }
+        }
+    }
+
+    void markCol(std::vector<std::vector<int>> &matrix, int n, int m, int j) {
+        for (int i = 0; i < n; i++) {
+            if (matrix[i][j] != 0 && matrix[i][j] != -1) {
+                matrix[i][j] = -1;
+            }
+        }
+    }
+
+    void setZeroes(std::vector<std::vector<int>> &matrix) {
+        int n = matrix.size();
+        if (n == 0) return;
+        int m = matrix[0].size();
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (matrix[i][j] == 0) {
+                    markRow(matrix, n, m, i);
+                    markCol(matrix, n, m, j);
+                }
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (matrix[i][j] == -1) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+    }
+};
+==================================================BATTER===============================================
+class Solution {
+public:
+
+    void setZeroes(vector<vector<int>>& matrix) {
+        int n = matrix.size();
+        if (n == 0) return;
+        int m = matrix[0].size();
+        // int row[n] = {0}; // row array
+        // int colm[m] = {0}; // col array
+        vector<int> row(n, 0);
+        vector<int> colm(m, 0);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (matrix[i][j] == 0) {
+                    row[i] = 1;
+                    colm[j] = 1;
+                }
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (row[i]||colm[j]) {
+                    matrix[i][j]=0;
+                }
+            }
+        }
+        
+    }
+};
+==================================================OPTIMAL===============================================
